@@ -1,0 +1,1 @@
+import './globals.css'; export const metadata={title:'Henson Family Tracker',description:'Private family location sharing'}; export default function Layout({children}){return <html lang="en"><body>{children}</body></html>}
