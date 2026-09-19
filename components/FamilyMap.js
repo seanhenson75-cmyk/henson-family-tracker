@@ -1,8 +1,7 @@
 'use client';
 import {useEffect} from 'react';
 import {MapContainer,TileLayer,Marker,Popup,useMap} from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';import 'leaflet/dist/leaflet.css';
 function mk(name,own){return L.divIcon({className:'personMarkerWrap',html:`<div class="personMarker ${own?'meMarker':''}">${(name||'?').slice(0,1).toUpperCase()}</div><div class="markerName">${name||'Family'}</div>`,iconSize:[64,54],iconAnchor:[32,27]})}
-function Follow({point}){const map=useMap();useEffect(()=>{if(point)map.setView([point.latitude,point.longitude],16)},[point,map]);return null}
-export default function FamilyMap({center,members,me,onSelect}){const all=[...members];if(me&&!all.some(x=>x.id===me.id))all.push(me);return <MapContainer center={center} zoom={16} zoomControl scrollWheelZoom touchZoom className="leafletMap"><TileLayer attribution="&copy; OpenStreetMap contributors" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>{all.map(x=><Marker key={x.id} position={[x.latitude,x.longitude]} icon={mk(x.display_name,me&&x.id===me.id)} eventHandlers={{click:()=>onSelect(x.id)}}><Popup>{x.display_name}</Popup></Marker>)}<Follow point={me}/></MapContainer>}
+function Focus({point}){const map=useMap();useEffect(()=>{if(point)map.setView([point.latitude,point.longitude],map.getZoom()<15?16:map.getZoom())},[point?.id,map]);return null}
+export default function FamilyMap({center,members,me,selected,onSelect}){const all=[...members];if(me&&!all.some(x=>x.id===me.id))all.push(me);const focus=all.find(x=>x.id===selected)||me;return <MapContainer center={center} zoom={16} zoomControl scrollWheelZoom touchZoom className="leafletMap"><TileLayer attribution="&copy; OpenStreetMap contributors" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>{all.map(x=><Marker key={x.id} position={[x.latitude,x.longitude]} icon={mk(x.display_name,me&&x.id===me.id)} eventHandlers={{click:()=>onSelect(x.id)}}><Popup>{x.display_name}</Popup></Marker>)}<Focus point={focus}/></MapContainer>}
