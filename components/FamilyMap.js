@@ -3,6 +3,6 @@ import {useEffect} from 'react';
 import {MapContainer,TileLayer,Marker,Popup,useMap} from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-const icon=L.divIcon({className:'familyMarker',html:'●',iconSize:[34,34],iconAnchor:[17,17]});
-function Follow({point}){const map=useMap();useEffect(()=>{if(point)map.setView([point.latitude,point.longitude],15)},[point,map]);return null}
-export default function FamilyMap({center,members,me,onSelect}){return <MapContainer center={center} zoom={15} zoomControl scrollWheelZoom touchZoom className="leafletMap"><TileLayer attribution="&copy; OpenStreetMap contributors" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>{members.map(m=><Marker key={m.id} position={[m.latitude,m.longitude]} icon={icon} eventHandlers={{click:()=>onSelect(m.id)}}><Popup>{m.display_name}</Popup></Marker>)}<Follow point={me}/></MapContainer>}
+function mk(name,own){return L.divIcon({className:'personMarkerWrap',html:`<div class="personMarker ${own?'meMarker':''}">${(name||'?').slice(0,1).toUpperCase()}</div><div class="markerName">${name||'Family'}</div>`,iconSize:[64,54],iconAnchor:[32,27]})}
+function Follow({point}){const map=useMap();useEffect(()=>{if(point)map.setView([point.latitude,point.longitude],16)},[point,map]);return null}
+export default function FamilyMap({center,members,me,onSelect}){const all=[...members];if(me&&!all.some(x=>x.id===me.id))all.push(me);return <MapContainer center={center} zoom={16} zoomControl scrollWheelZoom touchZoom className="leafletMap"><TileLayer attribution="&copy; OpenStreetMap contributors" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>{all.map(x=><Marker key={x.id} position={[x.latitude,x.longitude]} icon={mk(x.display_name,me&&x.id===me.id)} eventHandlers={{click:()=>onSelect(x.id)}}><Popup>{x.display_name}</Popup></Marker>)}<Follow point={me}/></MapContainer>}
