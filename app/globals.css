@@ -4,3 +4,6 @@
 
 /* Seasonal animation stays active even when the phone requests reduced motion. */
 .seasonal span{top:-3rem!important;bottom:auto!important;animation-name:seasonFall!important;animation-timing-function:linear!important;animation-iteration-count:infinite!important;will-change:transform}
+
+/* Light / dark mode */
+:root[data-theme="dark"]{color-scheme:dark} :root[data-theme="dark"] body,:root[data-theme="dark"] main{background:#111;color:#f4f4f4} :root[data-theme="dark"] header,:root[data-theme="dark"] .sheet,:root[data-theme="dark"] .address,:root[data-theme="dark"] .member,:root[data-theme="dark"] .invite{background:#1b1b1b!important;color:#f4f4f4!important;border-color:#3a3a3a!important} :root[data-theme="dark"] input{background:#292929!important;color:#fff!important;border-color:#555!important} :root[data-theme="dark"] small,:root[data-theme="dark"] .privacy,:root[data-theme="dark"] .address p{color:#c7c7c7!important}
