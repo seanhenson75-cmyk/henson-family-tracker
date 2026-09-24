@@ -1,0 +1,9 @@
+{
+  "appId": "com.henson.familytracker",
+  "appName": "Henson Family Tracker",
+  "webDir": "out",
+  "server": {
+    "url": "https://henson-family-tracker.vercel.app",
+    "cleartext": false
+  }
+}
