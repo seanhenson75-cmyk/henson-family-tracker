@@ -38,10 +38,12 @@ jobs:
       - name: Create Android project
         run: npx cap add android
 
-      - name: Prepare Android web assets
+      - name: Prepare Android assets
         run: |
+          mkdir -p android/app/src/main/assets
           mkdir -p android/app/src/main/assets/public
           touch android/app/src/main/assets/public/.keep
+          touch android/app/src/main/assets/capacitor.plugins.json
 
       - name: Sync native plugins
         run: npx cap sync android
