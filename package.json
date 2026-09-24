@@ -1,1 +1,25 @@
-{"scripts":{"dev":"next dev","build":"next build","start":"next start"},"dependencies":{"@supabase/supabase-js":"^2.57.4","leaflet":"^1.9.4","next":"^16.0.0","react":"^19.1.1","react-dom":"^19.1.1","react-leaflet":"^5.0.0"},"devDependencies":{}}
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "native:sync": "npx cap sync",
+    "native:android": "npx cap open android",
+    "native:ios": "npx cap open ios"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.4",
+    "leaflet": "^1.9.4",
+    "next": "^16.0.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-leaflet": "^5.0.0",
+    "@capacitor/core": "^7.4.3",
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/ios": "^7.4.3",
+    "@capacitor-community/background-geolocation": "^1.2.26"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.3"
+  }
+}
